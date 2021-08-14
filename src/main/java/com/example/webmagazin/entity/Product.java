@@ -27,6 +27,8 @@ public class Product extends AbsEntity {
     private boolean superPrice;
     private boolean newProduct;
     private String vendor;
+    @OneToMany
+    private List<Comentarya> comentaryas;
 
 
 

@@ -20,7 +20,5 @@ public class Country {
 
     private String name;
 
-    private String country;
-    private String district;
-    private String region;
+
 }

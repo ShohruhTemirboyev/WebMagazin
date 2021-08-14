@@ -6,8 +6,16 @@ import lombok.Data;
 
 @Data
 public class ReqUser {
+
     private String phoneNumber;
     private String password;
-    private String userName;
+    private String firstName;
+    private String lastName;
+    private String middleName;
     private String birthDate;
+    private String email;
+    private String nomer;
+    private String addres;
+    private Integer location;
+
 }
