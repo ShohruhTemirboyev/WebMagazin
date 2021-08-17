@@ -1,5 +1,6 @@
 package com.example.webmagazin.payloat;
 
+import com.example.webmagazin.entity.Address;
 import lombok.Data;
 
 
@@ -14,8 +15,8 @@ public class ReqUser {
     private String middleName;
     private String birthDate;
     private String email;
-    private String nomer;
-    private String addres;
+    private String number;
+    private ResAddres resAddres;
     private Integer location;
 
 }

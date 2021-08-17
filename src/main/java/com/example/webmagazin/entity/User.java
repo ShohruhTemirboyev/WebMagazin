@@ -31,6 +31,7 @@ public class User extends AbsEntity implements UserDetails {
     private String birthDate;
     private String email;
     private String number;
+    private Integer location;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "liked_products", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")})
@@ -39,14 +40,16 @@ public class User extends AbsEntity implements UserDetails {
     @JoinTable(name = "card_products", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")})
     private List<Product> card;
-    private Integer location;
-    @ManyToOne
-    private Address address;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="user_role",
         joinColumns = {@JoinColumn(name = "user_id")},
         inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roles;
+
+    @ManyToOne
+    private Address address;
+
 
     public User(String phoneNumber, String password, String userName, List<Role> roles) {
         this.phoneNumber = phoneNumber;

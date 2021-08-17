@@ -18,8 +18,10 @@ import java.util.UUID;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2",strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
      @CreationTimestamp
      private Timestamp createdAt;
@@ -28,8 +30,8 @@ public abstract class AbsEntity {
      private Timestamp updatedAt;
 
      @CreatedBy
-     private Long createdBy;
+     private UUID createdBy;
 
      @LastModifiedBy
-     private Long updatedBy;
+     private UUID updatedBy;
 }

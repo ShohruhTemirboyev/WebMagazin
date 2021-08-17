@@ -3,14 +3,19 @@ package com.example.webmagazin.payloat;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class ReqProduct {
-    private Long productTypeId;
-    private List<Long> productSalesTypeId;
-    private String productName;
-    private Long price;
-    private String desription;
-    private String attachmentId;
+    private String description;
+    private Double price;
+    private Long productType;
+    private String productTypeName;
+    private List<UUID> attachmentId;
+    private Integer count;
+    private Boolean bestseller;
+    private Boolean superPrice;
+    private Boolean newProduct;
+    private String vendor;
 
 }

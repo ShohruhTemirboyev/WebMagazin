@@ -15,12 +15,10 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Country country;
+    private String country;
 
-    @ManyToOne
-    private Region region;
 
-    @ManyToOne
-    private District district;
+    private String region;
+
+    private String district;
 }

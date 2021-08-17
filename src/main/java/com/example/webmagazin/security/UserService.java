@@ -7,6 +7,7 @@ import com.example.webmagazin.payloat.ReqUser;
 import com.example.webmagazin.payloat.ResUser;
 import com.example.webmagazin.repository.RoleRepository;
 import com.example.webmagazin.repository.UserRepository;
+import com.example.webmagazin.service.AddresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +28,8 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    AddresService addresService;
     public ApiJwtRespons saveUser(ReqUser reqUser){
 
         ApiJwtRespons response=new ApiJwtRespons();
@@ -35,7 +38,13 @@ public class UserService implements UserDetailsService {
                 User user=new User();
                 user.setPhoneNumber(reqUser.getPhoneNumber());
                 user.setPassword(passwordEncoder.encode(reqUser.getPassword()));
-
+                user.setFirstName(reqUser.getFirstName());
+                user.setLastName(reqUser.getLastName());
+                user.setMiddleName(reqUser.getMiddleName());
+                user.setEmail(reqUser.getEmail());
+                user.setNumber(reqUser.getNumber());
+                user.setLocation(reqUser.getLocation());
+               user.setAddress((addresService.saveAddres(reqUser.getResAddres())));
                 user.setBirthDate(reqUser.getBirthDate());
                 user.setRoles((Collections.singletonList(roleRepository.findByRoleName(RoleName.ROLE_USER))));
                 userRepository.save(user);

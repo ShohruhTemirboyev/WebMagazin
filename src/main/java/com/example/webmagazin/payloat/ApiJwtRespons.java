@@ -11,9 +11,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiJwtRespons  {
+
     private String message;
     private boolean success;
-    private Long userId;
+    private UUID userId;
     private String token;
     private String tokenType = "Token";
 

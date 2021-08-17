@@ -20,7 +20,8 @@ public class Product extends AbsEntity {
     @Column(nullable = false)
     private Double price;
     private Long productType;
-    @OneToMany
+    private String productTypeName;
+    @ManyToMany
     private List<Attachment> attachments;
     private Integer count;
     private boolean bestseller;
