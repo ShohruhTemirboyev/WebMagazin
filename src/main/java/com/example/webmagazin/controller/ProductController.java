@@ -36,7 +36,7 @@ public class ProductController {
         ApiResponse response=productService.deleteProduct(id);
         return ResponseEntity.status(response.isSuccess()?HttpStatus.OK:HttpStatus.CONFLICT).body(response);
     }
-    @GetMapping("/getUsers")
+    @GetMapping("/getProduct")
     public HttpEntity<?> getUsers(){
         return ResponseEntity.ok(productRepository.findAll());
     }
