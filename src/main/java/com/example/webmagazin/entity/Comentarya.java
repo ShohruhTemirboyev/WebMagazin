@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.UUID;
 
 
 @Data
@@ -20,7 +21,8 @@ public class Comentarya  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+
     private String text;
     private Integer personId;
-    private Integer productId;
+    private UUID productId;
 }

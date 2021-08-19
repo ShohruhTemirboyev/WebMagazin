@@ -18,7 +18,8 @@ public class Product extends AbsEntity {
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private Double price;
+    private Double newPrice;
+    private Double oldPrice;
     private Long productType;
     private String productTypeName;
     @ManyToMany
@@ -28,7 +29,7 @@ public class Product extends AbsEntity {
     private boolean superPrice;
     private boolean newProduct;
     private String vendor;
-    @OneToMany
+    @ManyToMany
     private List<Comentarya> comentaryas;
 
 
