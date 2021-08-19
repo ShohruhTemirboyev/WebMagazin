@@ -5,6 +5,7 @@ import com.example.webmagazin.payloat.ApiResponse;
 import com.example.webmagazin.payloat.ReqProduct;
 import com.example.webmagazin.repository.ProductRepository;
 import com.example.webmagazin.service.ProductService;
+import com.example.webmagazin.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpEntity;
@@ -39,6 +40,13 @@ public class ProductController {
     @GetMapping("/getProduct")
     public HttpEntity<?> getUsers(){
         return ResponseEntity.ok(productRepository.findAll());
+    }
+
+    @GetMapping
+    public HttpEntity<?> getListProduct(@RequestHeader Long productTypeId,
+                                        @RequestParam(value = "page",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page){
+    return ResponseEntity.ok(productService.getListProductType(productTypeId,page-1,6));
+
     }
 
 

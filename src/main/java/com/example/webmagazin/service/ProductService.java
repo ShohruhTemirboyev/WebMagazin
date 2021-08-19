@@ -5,7 +5,9 @@ import com.example.webmagazin.payloat.ApiResponse;
 import com.example.webmagazin.payloat.ReqProduct;
 import com.example.webmagazin.repository.AttachmentRepository;
 import com.example.webmagazin.repository.ProductRepository;
+import com.example.webmagazin.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,6 +65,10 @@ public class ProductService {
             apiResponse.setMessage("Maxsulot o'chirishda xatolik");
         }
         return apiResponse;
+    }
+    public List<Product> getListProductType(Long productType,int page,int size){
+        Page<Product> products=productRepository.findAllByProductType(productType, CommonUtils.getPageable(page,size));
+         return products.getContent();
     }
 
 }

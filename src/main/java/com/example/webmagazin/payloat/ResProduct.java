@@ -1,16 +1,20 @@
 package com.example.webmagazin.payloat;
 
-import com.example.webmagazin.entity.Attachment;
-
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class ResProduct {
-
-    private String status;
-    private String dicription;
-    private Attachment attachment;
+    private String description;
+    private Double price;
+    private String productTypeName;
+    private List<UUID> attachmentId;
+    private Integer count;
+    private Boolean bestseller;
+    private Boolean superPrice;
+    private Boolean newProduct;
+    private String vendor;
 
 }
