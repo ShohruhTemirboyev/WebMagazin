@@ -2,6 +2,7 @@ package com.example.webmagazin.service;
 
 import com.example.webmagazin.entity.Comentarya;
 import com.example.webmagazin.entity.Product;
+import com.example.webmagazin.entity.User;
 import com.example.webmagazin.payloat.ApiResponse;
 import com.example.webmagazin.payloat.ReqComentarya;
 import com.example.webmagazin.repository.ComentaryaRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ComentaryaService {
@@ -20,19 +22,16 @@ public class ComentaryaService {
     @Autowired
     ProductRepository productRepository;
 
-    public ApiResponse addComentarya(ReqComentarya reqComentarya){
+    public ApiResponse addComentarya(User user, UUID productId,String text){
         ApiResponse response=new ApiResponse();
         try {
             Comentarya comentarya=new Comentarya();
-            comentarya.setPersonId(reqComentarya.getPersonId());
-            comentarya.setText(reqComentarya.getText());
-            comentarya.setProductId(reqComentarya.getProductId());
+            comentarya.setText(text);
+            comentarya.setProductId(productId);
+            comentarya.setUser(user);
             comentaryaRepository.save(comentarya);
-            Optional<Product> product=productRepository.findById(reqComentarya.getProductId());
-            if (product.isPresent()){
-            }
-
-
+            response.setSuccess(true);
+            response.setMessage("Saqlandi");
 
         }
         catch (Exception exception){

@@ -25,14 +25,12 @@ public class ProductService {
         try {
             Product product=new Product();
             product.setDescription(reqProduct.getDescription());
-            product.setPrice(reqProduct.getPrice());
             product.setProductType(reqProduct.getProductType());
             product.setProductTypeName(reqProduct.getProductTypeName());
             product.setAttachments(attachmentRepository.findAllById(reqProduct.getAttachmentId()));
             product.setCount(reqProduct.getCount());
-            product.setBestseller(reqProduct.getBestseller());
-            product.setSuperPrice(reqProduct.getSuperPrice());
-            product.setNewProduct(reqProduct.getNewProduct());
+           product.setNewPrice(reqProduct.getNewPrice());
+           product.setOldPrice(reqProduct.getOldPrice());
             product.setVendor(reqProduct.getVendor());
             productRepository.save(product);
             response.setMessage("Maxsulot bazaga saqlandi");

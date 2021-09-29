@@ -25,12 +25,9 @@ public class Product extends AbsEntity {
     @ManyToMany
     private List<Attachment> attachments;
     private Integer count;
-    private boolean bestseller;
-    private boolean superPrice;
-    private boolean newProduct;
+
     private String vendor;
-    @ManyToMany
-    private List<Comentarya> comentaryas;
+
 
 
 

@@ -8,14 +8,13 @@ import java.util.UUID;
 @Data
 public class ReqProduct {
     private String description;
-    private Double price;
+    private Double newPrice;
+    private Double oldPrice;
     private Long productType;
     private String productTypeName;
     private List<UUID> attachmentId;
     private Integer count;
-    private Boolean bestseller;
-    private Boolean superPrice;
-    private Boolean newProduct;
+
     private String vendor;
 
 }
