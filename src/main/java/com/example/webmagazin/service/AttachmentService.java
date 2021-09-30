@@ -53,7 +53,7 @@ public class AttachmentService {
                     attachment.getContentType(),
                     attachment.getSize()));
         }
-        return new ApiResponseModel("Saqlandi",true,resUploadFiles);
+        return new ApiResponseModel("Saqlandi",200,resUploadFiles);
     }
     public HttpEntity<?> getAttachmentContent(UUID attachmentId){
         Attachment attachment=attachmentRepository.findById(attachmentId).orElseThrow(() -> new ResourceNotFoundException("getAttachment"));

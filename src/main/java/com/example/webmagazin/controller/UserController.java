@@ -32,11 +32,11 @@ public class UserController {
     @PostMapping("/register")
     public HttpEntity<?> addUser(@RequestBody ReqUser reqUser){
         ApiJwtRespons response=userService.saveUser(reqUser);
-        if (response.isSuccess()){
+        if (response.getCode()==200){
         JwtRespons jwtRespons=getJwtRespons(reqUser.getPhoneNumber(),reqUser.getPassword());
         response.setToken(jwtRespons.getToken());
         response.setTokenType(jwtRespons.getTokenType());}
-        return ResponseEntity.status(response.isSuccess()? HttpStatus.CREATED:HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")

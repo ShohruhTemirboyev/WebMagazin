@@ -20,7 +20,7 @@ public class AttachmentController {
     @PostMapping("/upload")
     public HttpEntity<?> addAttachment(MultipartHttpServletRequest request) throws IOException {
         ApiResponseModel responseModel=attachmentService.saveFile(request);
-        return ResponseEntity.status(responseModel.isSuccess()? HttpStatus.CREATED:HttpStatus.CONFLICT).body(responseModel);
+        return ResponseEntity.ok(responseModel);
 
     }
     @GetMapping("{id}")

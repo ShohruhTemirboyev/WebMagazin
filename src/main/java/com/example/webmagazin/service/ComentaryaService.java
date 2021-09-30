@@ -30,13 +30,13 @@ public class ComentaryaService {
             comentarya.setProductId(productId);
             comentarya.setUser(user);
             comentaryaRepository.save(comentarya);
-            response.setSuccess(true);
+            response.setCode(200);
             response.setMessage("Saqlandi");
 
         }
         catch (Exception exception){
             response.setMessage("Saqlashda hatolik");
-            response.setSuccess(false);
+            response.setCode(500);
         }
         return response;
     }

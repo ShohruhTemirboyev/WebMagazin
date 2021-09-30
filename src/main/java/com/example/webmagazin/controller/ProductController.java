@@ -25,7 +25,7 @@ public class ProductController {
     @PostMapping("/addProduct")
     public  HttpEntity<?> addProduct(@RequestBody ReqProduct reqProduct){
         ApiResponse response=productService.saveProduct(reqProduct);
-        return ResponseEntity.status(response.isSuccess()? HttpStatus.CREATED:HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.ok(response);
     }
     @GetMapping("{id}")
     public HttpEntity<?> getAttachment(@PathVariable UUID id){
@@ -35,7 +35,7 @@ public class ProductController {
     @DeleteMapping("{id}")
     public HttpEntity<?> deleteProduct(@PathVariable UUID id){
         ApiResponse response=productService.deleteProduct(id);
-        return ResponseEntity.status(response.isSuccess()?HttpStatus.OK:HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.ok(response);
     }
     @GetMapping("/getProduct")
     public HttpEntity<?> getUsers(){

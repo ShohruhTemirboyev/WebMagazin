@@ -34,11 +34,11 @@ public class ProductService {
             product.setVendor(reqProduct.getVendor());
             productRepository.save(product);
             response.setMessage("Maxsulot bazaga saqlandi");
-            response.setSuccess(true);
+            response.setCode(200);
 
         }
         catch (Exception ex){
-            response.setSuccess(false);
+            response.setCode(500);
             response.setMessage("Product saqlashda xatolik");
         }
         return response;
@@ -49,17 +49,17 @@ public class ProductService {
         try {
             if (productRepository.existsById(id)){
                 productRepository.deleteById(id);
-                apiResponse.setSuccess(true);
+                apiResponse.setCode(200);
                 apiResponse.setMessage("Maxsulot o'chirildi");
             }
             else {
                 apiResponse.setMessage("Bunday Idlik maxsulot topilmadi");
-                apiResponse.setSuccess(false);
+                apiResponse.setCode(207);
             }
 
         }
         catch (Exception ex){
-            apiResponse.setSuccess(false);
+            apiResponse.setCode(500);
             apiResponse.setMessage("Maxsulot o'chirishda xatolik");
         }
         return apiResponse;

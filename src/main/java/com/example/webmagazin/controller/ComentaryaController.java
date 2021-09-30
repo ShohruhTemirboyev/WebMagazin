@@ -23,6 +23,6 @@ public class ComentaryaController {
     @PostMapping()
 public HttpEntity<?> addComent(@CurrentUser User user, @RequestParam UUID productId,@RequestParam String text){
         ApiResponse response=comentaryaService.addComentarya(user, productId, text);
-        return ResponseEntity.status(response.isSuccess()? HttpStatus.CREATED:HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.ok(response);
     }
 }

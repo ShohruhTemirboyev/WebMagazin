@@ -14,8 +14,8 @@ private Object object;
         this.object = object;
     }
 
-    public ApiResponseModel(String message, boolean success, Object object) {
-        super(message, success);
+    public ApiResponseModel(String message, int code, Object object) {
+        super(message, code);
         this.object = object;
     }
 }

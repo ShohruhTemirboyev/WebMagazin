@@ -23,15 +23,15 @@ public class ProductTypeService {
             productType.setName(reqProductType.getName());
             productTypeRepository.save(productType);
             response.setMessage("Malumot saqlandi");
-            response.setSuccess(true);
+            response.setCode(200);
            }
         else {
-            response.setSuccess(false);
+            response.setCode(202);
             response.setMessage("Bunday malumot mavjud");
         }
         }
         catch (Exception exception){
-            response.setSuccess(false);
+            response.setCode(500);
             response.setMessage("Saqlashda hatolik");
         }
         return  response;

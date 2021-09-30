@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ApiJwtRespons  {
 
     private String message;
-    private boolean success;
+    private int code;
     private UUID userId;
     private String token;
     private String tokenType = "Token";

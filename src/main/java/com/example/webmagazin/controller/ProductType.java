@@ -23,7 +23,7 @@ public class ProductType {
     @PostMapping("/addType")
     public HttpEntity<?> saveType(@RequestBody ReqProductType reqProductType){
         ApiResponse response= productTypeService.saveType(reqProductType);
-        return ResponseEntity.status(response.isSuccess()? HttpStatus.CREATED:HttpStatus.CONFLICT).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/getType")

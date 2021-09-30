@@ -12,5 +12,5 @@ import javax.persistence.MappedSuperclass;
 @AllArgsConstructor
 public class ApiResponse {
    private String message;
-   private boolean success;
+   private  int code;
 }
