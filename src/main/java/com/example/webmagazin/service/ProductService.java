@@ -33,7 +33,7 @@ public class ProductService {
            product.setOldPrice(reqProduct.getOldPrice());
             product.setVendor(reqProduct.getVendor());
             productRepository.save(product);
-            response.setMessage("Maxsulot bazaga saqlandi");
+            response.setMessage("Maxsulot bazaga ");
             response.setCode(200);
 
         }
