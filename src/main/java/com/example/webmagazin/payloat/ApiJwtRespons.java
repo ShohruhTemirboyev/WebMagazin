@@ -16,7 +16,7 @@ public class ApiJwtRespons  {
     private int code;
     private UUID userId;
     private String token;
-    private String tokenType = "Token";
+    private String tokenType = "Bearer";
 
     public ApiJwtRespons(String token) {
         this.token = token;

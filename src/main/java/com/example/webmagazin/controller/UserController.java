@@ -3,6 +3,7 @@ package com.example.webmagazin.controller;
 import com.example.webmagazin.entity.User;
 import com.example.webmagazin.payloat.*;
 import com.example.webmagazin.repository.UserRepository;
+import com.example.webmagazin.security.CurrentUser;
 import com.example.webmagazin.security.JwtTokenProvider;
 import com.example.webmagazin.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,11 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(phoneNumber,password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new JwtRespons(jwtTokenProvider.generateToken(authentication));
+    }
+    @PutMapping("/editUser")
+    public HttpEntity<?> getEdit(@RequestBody ReqUser reqUser, @CurrentUser User user){
+         ApiResponse response=userService.editUser(reqUser, user);
+        return ResponseEntity.ok(response);
+
     }
 }

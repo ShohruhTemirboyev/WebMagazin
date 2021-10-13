@@ -66,6 +66,29 @@ public class UserService implements UserDetailsService {
         }
         return response;
     }
+    public ApiResponse editUser(ReqUser reqUser,User user){
+        ApiResponse response=new ApiResponse();
+        try {
+            Optional<User>userOptional=Optional.ofNullable(userRepository.findByPhoneNumber(reqUser.getPhoneNumber()));
+            if (!userOptional.isPresent()){
+             user.setId(user.getId());
+             user.setPhoneNumber(reqUser.getPhoneNumber());
+             userRepository.save(user);
+             response.setMessage("Success");
+             response.setCode(200);
+            }
+            else {
+                response.setCode(202);
+                response.setMessage("Bunday raqamli user mavjud");
+            }
+
+        }
+        catch (Exception ex){
+          response.setMessage("Error");
+          response.setCode(500);
+        }
+        return response;
+    }
     public ResUser getUser(User user){
         return new ResUser(
                 user.getPhoneNumber(),
