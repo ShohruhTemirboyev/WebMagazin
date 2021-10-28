@@ -1,11 +1,12 @@
-package com.example.webmagazin.security;
+package com.example.webmagazin.service;
 
+import com.example.webmagazin.entity.Product;
 import com.example.webmagazin.entity.User;
 import com.example.webmagazin.entity.enam.RoleName;
 import com.example.webmagazin.payloat.*;
+import com.example.webmagazin.repository.ProductRepository;
 import com.example.webmagazin.repository.RoleRepository;
 import com.example.webmagazin.repository.UserRepository;
-import com.example.webmagazin.service.AddresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,6 +31,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     AddresService addresService;
+
+    @Autowired
+    ProductRepository productRepository;
 
 
     public ApiJwtRespons saveUser(ReqUser reqUser){
@@ -89,6 +93,62 @@ public class UserService implements UserDetailsService {
         }
         return response;
     }
+    public ApiResponse addLikedProduct(User user,UUID productId){
+        ApiResponse response=new ApiResponse();
+        try {
+          Optional<Product> optionalProduct=productRepository.findById(productId);
+          if (optionalProduct.isPresent()){
+              long count = user.getLikedProduct().stream().filter(person -> person.getDescription().equals(optionalProduct.get().getDescription())).count();
+            if (count==0){
+               user.getLikedProduct().add(optionalProduct.get());
+                if(optionalProduct.get().getInterests()!=null){
+                    optionalProduct.get().setInterests(optionalProduct.get().getInterests()+1);
+                }else{
+                    optionalProduct.get().setInterests(1L);
+                }
+               productRepository.save(optionalProduct.get());
+               userRepository.save(user);
+               response.setCode(200);
+               response.setMessage("Success");
+
+            }
+            else {
+                response.setMessage("Bunday product sizda mavjud");
+                response.setCode(208);
+            }
+          }
+          else {
+              response.setMessage("Bunday Id lik product topilmadi!!!");
+              response.setCode(207);
+          }
+
+        }
+        catch (Exception exception){
+            response.setMessage("Error");
+            response.setCode(500);
+        }
+        return response;
+    }
+    public ApiResponse remoweLikedProduct(User user, UUID productId){
+        ApiResponse response=new ApiResponse();
+        try{
+            Optional<Product> optional = productRepository.findById(productId);
+            if(optional.isPresent()) {
+                user.getLikedProduct().removeIf(book1 -> book1.getDescription().equals(optional.get().getDescription()));
+                userRepository.save(user);
+                response.setCode(200);
+                response.setMessage("success");
+            }else{
+                response.setCode(207);
+                response.setMessage("buynaqa idlik mahsulot mavjud emas !");
+            }
+        }catch(Exception e){
+            response.setCode(500);
+            response.setMessage("Error");
+        }
+        return response;
+    }
+
     public ResUser getUser(User user){
         return new ResUser(
                 user.getPhoneNumber(),

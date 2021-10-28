@@ -5,11 +5,10 @@ import com.example.webmagazin.payloat.*;
 import com.example.webmagazin.repository.UserRepository;
 import com.example.webmagazin.security.CurrentUser;
 import com.example.webmagazin.security.JwtTokenProvider;
-import com.example.webmagazin.security.UserService;
+import com.example.webmagazin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -66,4 +65,16 @@ public class UserController {
         return ResponseEntity.ok(response);
 
     }
+    @PostMapping("/add/product/{productId}")
+    public HttpEntity<?> addLikedProduct(@CurrentUser User user,@PathVariable UUID productId){
+    ApiResponse response=userService.addLikedProduct(user,productId);
+    return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/remove/product/{productId}")
+    public HttpEntity<?> removeProduct(@CurrentUser User user,@PathVariable UUID productId){
+        ApiResponse response=userService.remoweLikedProduct(user,productId);
+        return ResponseEntity.ok(response);
+    }
+
 }

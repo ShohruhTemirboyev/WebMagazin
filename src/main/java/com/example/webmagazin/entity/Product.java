@@ -27,7 +27,7 @@ public class Product extends AbsEntity {
     private Integer count;
 
     private String vendor;
-
+    private Long interests;
 
 
 

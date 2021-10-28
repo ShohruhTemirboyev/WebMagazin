@@ -8,7 +8,6 @@ import java.util.UUID;
 public class ReqComentarya {
 
     private String text;
-    private Integer personId;
     private UUID productId;
 
 }

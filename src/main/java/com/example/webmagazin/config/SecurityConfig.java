@@ -2,7 +2,7 @@ package com.example.webmagazin.config;
 
 import com.example.webmagazin.security.JwtAuthenticationEntryPoint;
 import com.example.webmagazin.security.JwtAuthenticationFilter;
-import com.example.webmagazin.security.UserService;
+import com.example.webmagazin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
