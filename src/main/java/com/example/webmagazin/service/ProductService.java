@@ -5,12 +5,14 @@ import com.example.webmagazin.payloat.ApiResponse;
 import com.example.webmagazin.payloat.ReqProduct;
 import com.example.webmagazin.repository.AttachmentRepository;
 import com.example.webmagazin.repository.ProductRepository;
+import com.example.webmagazin.repository.UserRepository;
 import com.example.webmagazin.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,6 +22,8 @@ public class ProductService {
     AttachmentRepository attachmentRepository;
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    UserRepository userRepository;
     public ApiResponse saveProduct(ReqProduct reqProduct){
         ApiResponse response=new ApiResponse();
         try {
@@ -69,4 +73,38 @@ public class ProductService {
          return products.getContent();
     }
 
+    public ApiResponse editProduct(ReqProduct reqProduct,UUID productId){
+        ApiResponse response=new ApiResponse();
+        try {
+            Optional<Product> optionalProduct=productRepository.findById(productId);
+            if (optionalProduct.isPresent()){
+                Product producta =new Product();
+                producta.setDescription(reqProduct.getDescription());
+                producta.setProductType(reqProduct.getProductType());
+                producta.setProductTypeName(reqProduct.getProductTypeName());
+                producta.setAttachments(attachmentRepository.findAllById(reqProduct.getAttachmentId()));
+                producta.setCount(reqProduct.getCount());
+                producta.setNewPrice(reqProduct.getNewPrice());
+                producta.setOldPrice(reqProduct.getOldPrice());
+                producta.setVendor(reqProduct.getVendor());
+                productRepository.save(producta);
+                userRepository.deleteByLikedProduct(optionalProduct.get());
+                productRepository.deleteById(productId);
+                response.setMessage("Success");
+                response.setCode(200);
+            }
+            else {
+                response.setCode(207);
+                response.setMessage("Bunday Idlik mahhsulot topilmadi");
+            }
+
+        }
+        catch (Exception exception){
+            response.setMessage("Error");
+            response.setCode(500);
+        }
+        return response;
+    }
 }
+
+

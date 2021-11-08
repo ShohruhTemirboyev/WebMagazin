@@ -8,10 +8,10 @@ import com.example.webmagazin.security.CurrentUser;
 import com.example.webmagazin.service.ComentaryaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -19,6 +19,7 @@ import java.util.UUID;
 public class ComentaryaController {
     @Autowired
     ComentaryaService comentaryaService;
+
     @PostMapping()
 public HttpEntity<?> addComent(@CurrentUser User user, @RequestBody ReqComentarya reqComentarya){
         ApiResponse response=comentaryaService.addComentarya(user,reqComentarya.getProductId(), reqComentarya.getText());
@@ -34,5 +35,11 @@ public HttpEntity<?> addComent(@CurrentUser User user, @RequestBody ReqComentary
     public HttpEntity<?> getComent(@PathVariable Long comentId){
         ApiResponseModel responseModel=comentaryaService.getComent(comentId);
         return ResponseEntity.ok(responseModel);
+    }
+    @GetMapping("/getComents/{productId}")
+    public HttpEntity<?> getComents(@PathVariable UUID productId){
+        ApiResponseModel responseModel=comentaryaService.getAllProductComent(productId);
+        return ResponseEntity.ok(responseModel);
+
     }
 }

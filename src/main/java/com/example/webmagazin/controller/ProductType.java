@@ -30,4 +30,11 @@ public class ProductType {
     public HttpEntity<?> getType(){
         return ResponseEntity.ok(productTypeRepository.findAll());
     }
+
+    @DeleteMapping("/getType/delete/{productType}")
+    public HttpEntity<?> deleteType(@PathVariable Integer productType){
+        ApiResponse response=productTypeService.delete(productType);
+        return ResponseEntity.ok(response);
+
+    }
 }

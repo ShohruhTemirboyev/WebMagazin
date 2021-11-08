@@ -11,7 +11,5 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     boolean existsByPhoneNumber(String phoneNumber);
     User findByPhoneNumber(String phoneNumber);
-    @Query(value = "select * from liked_products where product_id=:productId and user_id=:userId ",nativeQuery = true)
-    boolean existsByLikedProduct(@Param("productId") UUID productId,@Param("userId") UUID userId);
-//
+    void deleteByLikedProduct(Product product);
 }

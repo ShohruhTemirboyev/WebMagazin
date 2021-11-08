@@ -7,6 +7,8 @@ import com.example.webmagazin.repository.ProductTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductTypeService {
 
@@ -35,6 +37,29 @@ public class ProductTypeService {
             response.setMessage("Saqlashda hatolik");
         }
         return  response;
+    }
+
+    public ApiResponse delete(Integer productTypeId){
+        ApiResponse response=new ApiResponse();
+        try {
+            Optional<ProductType> productTypeOptional=productTypeRepository.findById(productTypeId);
+            if (productTypeOptional.isPresent()){
+                productTypeRepository.deleteById(productTypeId);
+                response.setCode(200);
+                response.setMessage("Success");
+            }
+            else {
+                response.setMessage("Bunday Idlik type topilmadi");
+                response.setCode(207);
+            }
+
+        }
+        catch (Exception exception){
+            response.setCode(500);
+            response.setMessage("Error");
+        }
+        return response;
+
     }
 
 }

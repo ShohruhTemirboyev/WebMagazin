@@ -37,11 +37,12 @@ public class ProductController {
         ApiResponse response=productService.deleteProduct(id);
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/getProduct")
-    public HttpEntity<?> getUsers(){
-        return ResponseEntity.ok(productRepository.findAll());
-    }
 
+    @PutMapping("/editProduct/{productId}")
+    public HttpEntity<?> editProduct(@RequestBody ReqProduct reqProduct,@PathVariable UUID productId){
+        ApiResponse response=productService.editProduct(reqProduct,productId);
+        return ResponseEntity.ok(response);
+    }
     @GetMapping
     public HttpEntity<?> getListProduct(@RequestHeader Long productTypeId,
                                         @RequestParam(value = "page",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page){

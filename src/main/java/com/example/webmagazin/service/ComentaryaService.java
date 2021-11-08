@@ -12,8 +12,10 @@ import com.example.webmagazin.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ComentaryaService {
@@ -84,6 +86,7 @@ public class ComentaryaService {
                 resComent.setText(comentaryaOptional.get().getText());
                 resComent.setProductId(comentaryaOptional.get().getProductId());
                 resComent.setId(comentId);
+                resComent.setDate(comentaryaOptional.get().getCreatedAt());
                 responseModel.setObject(resComent);
             }
             else {
@@ -97,5 +100,38 @@ public class ComentaryaService {
             responseModel.setMessage("Error");
         }
         return responseModel;
+    }
+    public ApiResponseModel getAllProductComent(UUID productId){
+        ApiResponseModel responseModel=new ApiResponseModel();
+        try {
+             Optional<Product> optionalProduct=productRepository.findById(productId);
+             if (optionalProduct.isPresent()){
+                List<ResComent> resComents=comentaryaRepository.findAllByProductId(productId).stream().map(comentarya -> getComentList(comentarya)).collect(Collectors.toList());
+                 responseModel.setCode(200);
+                 responseModel.setMessage("Success");
+                responseModel.setObject(resComents);
+             }
+
+
+             else {
+                 responseModel.setMessage("Bunday mahsulot topilmadi");
+                 responseModel.setCode(207);
+             }
+        }
+        catch (Exception e){
+            responseModel.setCode(500);
+            responseModel.setMessage("Error");
+        }
+        return responseModel;
+    }
+    public ResComent getComentList(Comentarya comentarya){
+
+      ResComent resComent=new ResComent();
+      resComent.setText(comentarya.getText());
+      resComent.setId(comentarya.getId());
+      resComent.setProductId(comentarya.getProductId());
+      resComent.setName(comentarya.getUser().getFirstName()+" "+comentarya.getUser().getLastName());
+      resComent.setDate(comentarya.getCreatedAt());
+        return resComent;
     }
 }
